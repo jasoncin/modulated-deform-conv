@@ -392,7 +392,7 @@ class DeformConv2d(nn.Module):
 
     def forward(self, x, offset):
         return deform_conv2d(x, offset, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                           self.groups, self.deformable_group,self.in_step)
+                           self.groups, self.deformable_groups,self.in_step)
 
     # def forward(ctx, input, offset, weight, bias=None, stride=1, padding=0, dilation=1,
     #             groups=1, deformable_groups=1 , in_step=64):
@@ -439,7 +439,7 @@ class ModulatedDeformConv2d(nn.Module):
 
     def forward(self, x, offset,mask):
         return modulated_deform_conv2d(x, offset, mask, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                           self.groups, self.deformable_group,self.in_step)
+                           self.groups, self.deformable_groups,self.in_step)
 
     # def forward(ctx, input, offset, mask, weight, bias=None, stride=1, padding=0, dilation=1,
     #             groups=1, deformable_groups=1 , in_step=64):
@@ -486,7 +486,7 @@ class DeformConv3d(nn.Module):
 
     def forward(self, x, offset):
         return deform_conv3d(x, offset, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                           self.groups, self.deformable_group,self.in_step)
+                           self.groups, self.deformable_groups,self.in_step)
 
     # def forward(ctx, input, offset, weight, bias=None, stride=1, padding=0, dilation=1,
     #             groups=1, deformable_groups=1 , in_step=64):
@@ -533,7 +533,7 @@ class ModulatedDeformConv3d(nn.Module):
 
     def forward(self, x, offset,mask):
         return modulated_deform_conv3d(x, offset, mask, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                           self.groups, self.deformable_group,self.in_step)
+                           self.groups, self.deformable_groups,self.in_step)
 
     # def __init__(self, in_channels, out_channels, kernel_size, stride=1, padding=0, dilation=1,
     #              groups=1, deformable_groups=1, bias=False, in_step=64):
@@ -749,7 +749,7 @@ class DeformConv2dPack(DeformConv2d):
     def forward(self, x):
         offset = self.conv_offset(x)
         return deform_conv2d(x, offset, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                             self.groups, self.deformable_group, self.in_step)
+                             self.groups, self.deformable_groups, self.in_step)
 
 class ModulatedDeformConv2dPack(ModulatedDeformConv2d):
     def __init__(self, *args, **kwargs):
@@ -781,7 +781,7 @@ class ModulatedDeformConv2dPack(ModulatedDeformConv2d):
         offset = self.conv_offset(x)
         mask = self.conv_mask(x)
         return deform_conv2d(x, offset, mask, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                             self.groups, self.deformable_group, self.in_step)
+                             self.groups, self.deformable_groups, self.in_step)
 
 class DeformConv3dPack(DeformConv3d):
     def __init__(self, *args, **kwargs):
@@ -805,7 +805,7 @@ class DeformConv3dPack(DeformConv3d):
     def forward(self, x):
         offset = self.conv_offset(x)
         return deform_conv3d(x, offset, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                             self.groups, self.deformable_group, self.in_step)
+                             self.groups, self.deformable_groups, self.in_step)
 
 class ModulatedDeformConv3dPack(ModulatedDeformConv3d):
     def __init__(self, *args, **kwargs):
@@ -835,5 +835,5 @@ class ModulatedDeformConv3dPack(ModulatedDeformConv3d):
         offset = self.conv_offset(x)
         mask = self.conv_mask(x)
         return deform_conv3d(x, offset, mask, self.weight, self.bias, self.stride, self.padding, self.dilation,
-                             self.groups, self.deformable_group, self.in_step)
+                             self.groups, self.deformable_groups, self.in_step)
 
